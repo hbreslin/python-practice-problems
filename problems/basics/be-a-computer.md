@@ -26,8 +26,8 @@ What is the value of `c` after evaluating the following code?
 
     c = True
     d = False
-    c = c and d
-    c = not c or d
+    c = c and d # d is false, so c and d is false --> c = false
+    c = not c or d # not c = true, d is false, so c or d is true, so c = true
 
 ## Exercise #3
 
@@ -59,27 +59,63 @@ prints $3.50
 
 What is the output of the following code?
 
-    def F1(i, j) :
-        print(f"F1({i}, {j})")
-        F2(j, i+j)
-        print(f"F1: i = {i}, j = {j}")
-        
 
-    def F2(i, j) :
-        print(f"    F2({i}, {j})".format(i, j))
-        k = F3(i, j)
-        print(f"    F2: i = {i}, j = {j}, k = {k}")
-        
+def F1(i, j) :
+    print(f"F1({i}, {j})") 
+    F2(j, i+j) 
+    print(f"F1: i = {i}, j = {j}")
+    
 
-    def F3(i, j) :
-        print(f"        F3({i}, {j})".format(i, j))
-        i = i+j
-        j = i+2*j
-        k = 2*i+3*j
-        print(f"        F3: i = {i}, j = {j}, k = {k}")
-        return k
-        
+def F2(i, j) :
+    print(f"    F2({i}, {j})".format(i, j))
+    k = F3(i, j)
+    print(f"    F2: i = {i}, j = {j}, k = {k}")
+    
 
-    print("Result:")
-    F1(1, 1)
-    print()
+def F3(i, j) :
+    print(f"        F3({i}, {j})".format(i, j))
+    i = i+j
+    j = i+2*j
+    k = 2*i+3*j
+    print(f"        F3: i = {i}, j = {j}, k = {k}")
+    return k
+"""
+let our input values be a and b
+call F1(a,b)
+
+prints "F1(a,b)"
+    #calls F2(b,a+1)
+    prints "    F2(b,a+1)"
+        #calls F3(b, a+1)
+        prints "        F3(b, a+1)"
+            #changes values
+            #i = i+j = b+a+1
+            #j = (b+a+1)+2*j
+            #k = 2*(b+a+1)+3*(b+2(a+1))
+        prints "        F3: i = b+a+1, j = b+2a+2, k = 2b+3a+3
+        returns k
+    prints "    F2: i = b, j = a+1, k = 2b+3a+3"
+prints "F1: i = a, j = b"
+
+"""
+    
+
+print("Result:")
+F1(1, 1)
+
+"""
+plugging in the values: a = 1, b = 1
+F1(1,1)
+    F2(1,2)
+        F3(1, 2)"
+            #changes values
+            #i = i+j = 3
+            #j = (3)+2*j = 7
+            #k = 2*(3)+3*(7) = 27
+        F3: i = 3, j = 7, k = 27
+        #returns k
+    F2: i = 1, j = 2, k = 27
+F1: i = 1, j = 1
+
+"""
+print()
